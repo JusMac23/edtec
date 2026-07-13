@@ -1,0 +1,96 @@
+/* Color token architecture synchronized with main framework engine */
+:root {
+    --bg-primary: #f1f5f9; /* Shifted to a slightly deeper gray-blue for better card contrast */
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --border: #e2e8f0;
+    --input-bg: #ffffff;
+    --error-bg: #fef2f2;
+    --error-border: #fecaca;
+    --error-text: #991b1b;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --success-text: #166534;
+    --focus-ring: rgba(79, 70, 229, 0.2); /* Enhanced glow opacity */
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --border: #334155;
+    --input-bg: #0f172a; /* Inset input backgrounds for dark mode */
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --error-border: rgba(239, 68, 68, 0.25);
+    --error-text: #f87171;
+    --success-bg: rgba(34, 197, 94, 0.1);
+    --success-border: rgba(34, 197, 94, 0.25);
+    --success-text: #4ade80;
+    --focus-ring: rgba(99, 102, 241, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; background-color: var(--bg-primary); color: var(--text-primary); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 2.5rem 1.5rem; transition: background-color 0.3s ease; }
+
+/* Shared structural container wrapping both forms */
+.login-container, .auth-container { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2.5rem; width: 100%; max-width: 480px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05); animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Minimalist Branding Header */
+.brand-logo { text-align: center; font-size: 1.75rem; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem; }
+.login-container h1 { font-size: 1.5rem; color: var(--accent); font-weight: 700; text-align: center; margin-bottom: 0.5rem; letter-spacing: -0.025em; }
+p.subtitle { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2.5rem; }
+
+/* Structural Alert Layout Blocks */
+.error-box, .alert-box { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; border-radius: 12px; font-size: 0.9rem; font-weight: 500; margin-bottom: 1.75rem; border: 1px solid transparent; border-left-width: 4px; }
+.error-box, .alert-error { background-color: var(--error-bg); color: var(--error-text); border-color: var(--error-border); border-left-color: var(--error-text); animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+@keyframes shake { 10%, 90% { transform: translateX(-1px); } 20%, 80% { transform: translateX(2px); } 30%, 50%, 70% { transform: translateX(-4px); } 40%, 60% { transform: translateX(4px); } }
+.alert-success { background-color: var(--success-bg); color: var(--success-text); border-color: var(--success-border); border-left-color: var(--success-text); }
+.error-icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* Structural Form Split Containers */
+.form-row { display: flex; gap: 1.25rem; }
+.form-row .form-group { flex: 1; }
+.form-group { margin-bottom: 1.5rem; }
+label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-secondary); }
+
+/* Target all validation states uniformly */
+input[type="email"], input[type="password"], input[type="text"], input[type="tel"], input { width: 100%; padding: 0.65rem 1rem; border: 1px solid var(--border); background-color: var(--input-bg); color: var(--text-primary); border-radius: 10px; font-size: 0.95rem; font-family: 'Poppins', sans-serif; outline: none; transition: all 0.25s ease; }
+input:hover { border-color: #cbd5e1; }
+[data-theme="dark"] input:hover { border-color: #475569; }
+input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--focus-ring); background-color: var(--card-bg); }
+
+/* Secure Layout Architecture For Hidden Input Fields */
+.password-field-container { position: relative; display: flex; align-items: center; width: 100%; }
+.password-field-container input { padding-right: 3rem; }
+.password-toggle { position: absolute; right: 0.75rem; background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0.4rem; border-radius: 6px; transition: all 0.2s ease; }
+.password-toggle:hover { color: var(--text-primary); background-color: var(--bg-primary); }
+.password-toggle svg { width: 18px; height: 18px; }
+
+/* Visibility Control States */
+.password-toggle .eye-show { display: block; }
+.password-toggle .eye-hide { display: none; }
+.password-toggle.revealed .eye-show { display: none; }
+.password-toggle.revealed .eye-hide { display: block; }
+
+/* Main Button & Footers */
+button[type="submit"], .submit-btn { width: 100%; padding: 0.65rem 1rem; background-color: var(--accent); color: #ffffff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 1rem; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px -2px var(--focus-ring); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+button[type="submit"]:hover, .submit-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 16px -2px var(--focus-ring); }
+button[type="submit"]:active, .submit-btn:active { transform: translateY(0); box-shadow: 0 2px 4px -2px var(--focus-ring); }
+.back-index-btn { display: flex; align-items: center; justify-content: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s ease, transform 0.2s ease; }
+.footer-link { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary); }
+.footer-link a { color: var(--accent); text-decoration: none; font-weight: 600; margin-left: 0.25rem; transition: color 0.2s ease; }
+.footer-link a:hover { text-decoration: underline; color: var(--accent-hover); }
+
+/* Mobile Responsiveness Viewport Correction Overrides */
+@media screen and (max-width: 520px) {
+    .form-row { flex-direction: column; gap: 0; }
+    .login-container { padding: 2.5rem 1.5rem; border-radius: 16px; }
+    .login-container h1 { font-size: 1.35rem; }
+}
