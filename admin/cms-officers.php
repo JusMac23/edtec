@@ -42,9 +42,9 @@
                                 </td>
                                 <td>
                                     <?php if(!empty($officerProfileItem['officer_photo']) && file_exists($officerProfileItem['officer_photo'])): ?>
-                                        <img src="<?= htmlspecialchars($officerProfileItem['officer_photo']) ?>" alt="Portrait" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 1px solid #e2e8f0;">
+                                        <?= htmlspecialchars(basename($officerProfileItem['officer_photo'])) ?>
                                     <?php else: ?>
-                                        <div style="width: 42px; height: 42px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 11px; font-weight: 600; border: 1px solid #e2e8f0;">N/A</div>
+                                        N/A
                                     <?php endif; ?>
                                 </td>
                                 <td style="font-weight: 600; color: #0f172a;">

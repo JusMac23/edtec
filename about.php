@@ -123,7 +123,7 @@ foreach (['mission_img', 'vision_img'] as $imgKey) {
         .tagline-section:hover .tagline-content p { text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
 
         /* DARK MODE OVERRIDES */
-        body.dark .hero h1, body.dark .story-content h2, body.dark .goals-content h2, [data-theme="dark"] .hero h1, [data-theme="dark"] .story-content h2, [data-theme="dark"] .goals-content h2 { color: #ffffff !important; }
+        body.dark .about-section h1, body.dark .story-content h2, body.dark .goals-content h2, [data-theme="dark"] .about-section h1, [data-theme="dark"] .story-content h2, [data-theme="dark"] .goals-content h2 { color: #ffffff !important; }
         body.dark .hero p, body.dark .story-content p, body.dark .goals-content p, [data-theme="dark"] .hero p, [data-theme="dark"] .story-content p, [data-theme="dark"] .goals-content p { color: rgba(255, 255, 255, 0.85) !important; }
         body.dark .goals-section { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.1); }
 

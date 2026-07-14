@@ -1,38 +1,40 @@
 /* Modern CSS Variables for clean interface rendering switches */
 :root {
     --bg-primary: #ffffff;
-    --bg-secondary: #eeeeee;
-    --text-primary: #0f172a;
-    --text-secondary: #64748b;
-    --text-tertiary: #4f46e5;
-    --accent: #4f46e5;
+    --bg-secondary: #f8fafc; /* Sleek slate-tinged white instead of harsh #eeeeee */
+    --text-primary: #0f172a;  /* Deep slate for crisp readability */
+    --text-secondary: #475569; /* Balanced contrast gray for subtext */
+    --text-tertiary: #312e81;  /* Rich indigo for bold hero elements */
+    --accent: #4f46e5;         /* Modern Indigo accent replacing old legacy blue */
     --accent-hover: #4338ca;
-    --accent-ring: rgba(79, 70, 229, 0.2);
+    --accent-ring: rgba(79, 70, 229, 0.15);
+    --accent-subtle: rgba(79, 70, 229, 0.04);
     --card-border: #e2e8f0;
     --dropdown-bg: #ffffff;
-    --dropdown-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.025);
-    --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-    --modal-overlay-bg: rgba(15, 23, 42, 0.5);
-    --input-bg: #f8fafc;
+    --dropdown-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --card-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03), 0 2px 4px -2px rgba(15, 23, 42, 0.02);
+    --card-shadow-hover: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --modal-overlay-bg: rgba(15, 23, 42, 0.4);
+    --input-bg: #f1f5f9;
 }
 
 [data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-tertiary: #f8f9fa;
-    --accent: #6366f1;
+    --bg-primary: #0b0f19;    /* Premium deep midnight OLED layout */
+    --bg-secondary: #151f32;  /* Slightly elevated slate card space */
+    --text-primary: #f8fafc;  /* Clean off-white text */
+    --text-secondary: #94a3b8; /* Soft readable secondary text */
+    --text-tertiary: #e2e8f0;  /* Bright slate text layer for dark mode heroes */
+    --accent: #6366f1;         /* Vibrant indigo built for dark backdrops */
     --accent-hover: #818cf8;
-    --accent-ring: rgba(99, 102, 241, 0.25);
-    --card-border: #334155;
-    --dropdown-bg: #1e293b;
-    --dropdown-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-    --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-    --modal-overlay-bg: rgba(0, 0, 0, 0.7);
-    --input-bg: #0f172a;
+    --accent-ring: rgba(99, 102, 241, 0.3);
+    --accent-subtle: rgba(99, 102, 241, 0.12);
+    --card-border: #223147;
+    --dropdown-bg: #151f32;
+    --dropdown-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --modal-overlay-bg: rgba(0, 0, 0, 0.6);
+    --input-bg: #0b0f19;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,11 +46,11 @@ body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; background-
 .icon-btn:hover { background-color: var(--card-border); color: var(--accent); transform: scale(1.05); }
 
 /* Enhanced Accent Button (Overrides base icon-btn) */
-.icon-btn.action-accent-btn { background-color: var(--accent); color: #ffffff; width: fit-content; height: 40px; padding: 0 1.25rem; border-radius: 15px; margin-bottom: 0.5rem; display: inline-flex; gap: 0.5rem; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px var(--accent-ring, rgba(0, 0, 0, 0.15)); }
+.icon-btn.action-accent-btn { background-color: var(--accent); color: #ffffff; width: fit-content; height: 40px; padding: 0 1.25rem; border-radius: 15px; margin-bottom: 0.5rem; display: inline-flex; gap: 0.5rem; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 12px var(--accent-ring); }
 
 /* Specific hover override to prevent base .icon-btn hover conflicts */
-.icon-btn.action-accent-btn:hover { background-color: var(--accent-hover); color: #ffffff; transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-ring, rgba(0, 0, 0, 0.25)); }
-.icon-btn.action-accent-btn:active { transform: translateY(0); box-shadow: 0 2px 6px var(--accent-ring, rgba(0, 0, 0, 0.15)); }
+.icon-btn.action-accent-btn:hover { background-color: var(--accent-hover); color: #ffffff; transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-ring); }
+.icon-btn.action-accent-btn:active { transform: translateY(0); box-shadow: 0 2px 6px var(--accent-ring); }
 
 /* Inner Elements*/
 .action-icon { width: 18px; height: 18px; flex-shrink: 0; }
@@ -73,7 +75,7 @@ body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; background-
 
 /* Drag and Drop Zone Container Styling */
 .dropzone-area { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; border: 2px dashed var(--card-border); border-radius: 12px; background-color: var(--input-bg); cursor: pointer; text-align: center; transition: all 0.2s ease; }
-.dropzone-area:hover { border-color: var(--accent); background-color: rgba(79, 70, 229, 0.02); }
+.dropzone-area:hover { border-color: var(--accent); background-color: var(--accent-subtle); }
 .dropzone-icon { width: 32px; height: 32px; color: var(--text-secondary); margin-bottom: 0.75rem; transition: transform 0.2s ease, color 0.2s ease; }
 .dropzone-area:hover .dropzone-icon { transform: translateY(-4px); color: var(--accent); }
 .dropzone-text { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); }
@@ -120,8 +122,8 @@ body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; background-
 .hero-container { margin: 0 auto; width: 100%; max-height: 950px; background-color: var(--bg-secondary); margin-bottom: 1rem; }
 .hero { max-width: 1500px; margin: 0 auto; padding: 5rem 2rem; text-align: center; }
 .hero h1 { font-size: 3.5rem; color: var(--text-tertiary); margin-bottom: 1.25rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; }
-.hero p { color: var(--text-tertiary); font-size: 1.25rem; line-height: 1.7; }
-
+.hero p { color: var(--text-secondary); font-size: 1.25rem; line-height: 1.7; }
+[data-theme="dark"] .hero p { color: var(--text-secondary); }
 
 /* Minimalist Pure-Image Carousel Architecture */
 .carousel-wrapper { width: 100%; max-width: 1500px; height: 600px; margin: 2rem auto 0 auto; overflow: hidden; position: relative; border-radius: 16px; box-shadow: var(--card-shadow); border: 1px solid var(--card-border); }

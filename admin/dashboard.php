@@ -313,6 +313,100 @@ if ($db instanceof PDO) {
 }
 
 // ==========================================
+// COURSES PAGE CONTROLLER & DATA SYNC
+// ==========================================
+
+// Smart PDO Connection Detector
+$pdo_conn = $db ?? $conn ?? $pdo ?? null;
+
+if ($pdo_conn instanceof PDO) {
+
+    // ---------------------------------------------------------
+    // 1. UPDATE ACTION HANDLER (FORM SUBMISSION)
+    // ---------------------------------------------------------
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_courses_cms') {
+        try {
+            // Helper function to handle UPSERT (Update if exists, Insert if missing) for static blocks
+            $updateCourseSection = function($table, $data, $columns) use ($pdo_conn) {
+                // Check if row 1 exists
+                $check = $pdo_conn->query("SELECT course_id FROM {$table} ORDER BY course_id ASC LIMIT 1")->fetch();
+                
+                if ($check) {
+                    // Update existing
+                    $id = $check['course_id'];
+                    $setClause = implode(", ", array_map(fn($col) => "{$col} = :{$col}", $columns));
+                    $sql = "UPDATE {$table} SET {$setClause} WHERE course_id = :id";
+                } else {
+                    // Insert new
+                    $cols = implode(", ", $columns);
+                    $vals = implode(", ", array_map(fn($col) => ":{$col}", $columns));
+                    $sql = "INSERT INTO {$table} ({$cols}) VALUES ({$vals})";
+                }
+
+                $stmt = $pdo_conn->prepare($sql);
+                $payload = [];
+                if ($check) $payload[':id'] = $id;
+
+                foreach ($columns as $col) {
+                    $payload[":{$col}"] = $data[$col] ?? '';
+                }
+                $stmt->execute($payload);
+            };
+
+            // Process 2-Year Bundled (5 Descriptions)
+            if (isset($_POST['bundled'])) {
+                $updateCourseSection('cms_course_2yr_bundled', $_POST['bundled'], [
+                    'course_title', 'course_desc1', 'course_desc2', 'course_desc3', 'course_desc4', 'course_desc5'
+                ]);
+            }
+
+            // Process Nominal Duration (7 Descriptions)
+            if (isset($_POST['nominal'])) {
+                $updateCourseSection('cms_course_nominal_duration', $_POST['nominal'], [
+                    'course_title', 'course_desc1', 'course_desc2', 'course_desc3', 'course_desc4', 'course_desc5', 'course_desc6', 'course_desc7'
+                ]);
+            }
+
+            // Process Special Training (8 Descriptions)
+            if (isset($_POST['special'])) {
+                $updateCourseSection('cms_course_special_training', $_POST['special'], [
+                    'course_title', 'course_desc1', 'course_desc2', 'course_desc3', 'course_desc4', 'course_desc5', 'course_desc6', 'course_desc7', 'course_desc8'
+                ]);
+            }
+
+            $messageSuccess = "Course sections have been successfully updated!";
+            
+        } catch (PDOException $e) {
+            $messageError = "Database Operation Failure: " . htmlspecialchars($e->getMessage());
+        }
+    }
+
+    // ---------------------------------------------------------
+    // 2. RETRIEVE DATA FOR RENDERING THE VIEW
+    // ---------------------------------------------------------
+    $course2yrbundledData = [];
+    $coursenominaldurationData = [];
+    $coursespecialtrainingData = [];
+
+    try {
+        // Fetch 2-Year Bundled
+        $stmt = $pdo_conn->query("SELECT * FROM cms_course_2yr_bundled ORDER BY course_id ASC LIMIT 1");
+        $course2yrbundledData = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+
+        // Fetch Nominal Duration
+        $stmt = $pdo_conn->query("SELECT * FROM cms_course_nominal_duration ORDER BY course_id ASC LIMIT 1");
+        $coursenominaldurationData = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+
+        // Fetch Special Training
+        $stmt = $pdo_conn->query("SELECT * FROM cms_course_special_training ORDER BY course_id ASC LIMIT 1");
+        $coursespecialtrainingData = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+
+    } catch (PDOException $e) {
+        $messageError = "Database Fetch Error: " . htmlspecialchars($e->getMessage());
+    }
+}
+
+// ==========================================
 // OFFICERS PAGE CONTROLLER (CRUD OPERATIONS)
 // ==========================================
 
@@ -718,7 +812,7 @@ if ($db instanceof PDO) {
     .cms-card-heading { padding: 16px 20px; font-size: 1rem; font-weight: 600; border-bottom: 1px solid #e2e8f0; background: #fafafa; color: #334155; }
 
     /* Unified System Forms UI Engine */
-    .about-cms-form, .policy-cms-form, .contact-cms-form, .footer-cms-form, .officers-cms-form { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .about-cms-form, .policy-cms-form, .contact-cms-form, .footer-cms-form, .officers-cms-form, .courses-cms-form { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
     .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 0.85rem; font-weight: 500; color: #475569; }
@@ -828,6 +922,9 @@ if ($db instanceof PDO) {
                     <li data-target="manage-about">
                         <span class="material-symbols-outlined">info</span>About Us
                     </li>
+                    <li data-target="manage-courses">
+                        <span class="material-symbols-outlined">topic</span>Course
+                    </li>
                     <li data-target="manage-officers">
                         <span class="material-symbols-outlined">people</span>Officers
                     </li>
@@ -854,6 +951,10 @@ if ($db instanceof PDO) {
 
                 <section id="manage-about" class="dashboard-section">
                     <?php include dirname(__DIR__) . '/admin/cms-about.php'; ?>
+                </section>
+
+                <section id="manage-courses" class="dashboard-section">
+                    <?php include dirname(__DIR__) . '/admin/cms-courses.php'; ?>
                 </section>
 
                 <section id="manage-officers" class="dashboard-section">
