@@ -1,11 +1,11 @@
 /* Modern CSS Variables for clean interface rendering switches */
 :root {
     --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc; /* Sleek slate-tinged white instead of harsh #eeeeee */
-    --text-primary: #0f172a;  /* Deep slate for crisp readability */
-    --text-secondary: #475569; /* Balanced contrast gray for subtext */
-    --text-tertiary: #312e81;  /* Rich indigo for bold hero elements */
-    --accent: #4f46e5;         /* Modern Indigo accent replacing old legacy blue */
+    --bg-secondary: #f8fafc; 
+    --text-primary: #0f172a;  
+    --text-secondary: #475569; 
+    --text-tertiary: #312e81; 
+    --accent: #4f46e5;         
     --accent-hover: #4338ca;
     --accent-ring: rgba(79, 70, 229, 0.15);
     --accent-subtle: rgba(79, 70, 229, 0.04);
@@ -19,12 +19,12 @@
 }
 
 [data-theme="dark"] {
-    --bg-primary: #0b0f19;    /* Premium deep midnight OLED layout */
-    --bg-secondary: #151f32;  /* Slightly elevated slate card space */
-    --text-primary: #f8fafc;  /* Clean off-white text */
-    --text-secondary: #94a3b8; /* Soft readable secondary text */
-    --text-tertiary: #e2e8f0;  /* Bright slate text layer for dark mode heroes */
-    --accent: #6366f1;         /* Vibrant indigo built for dark backdrops */
+    --bg-primary: #0b0f19;    
+    --bg-secondary: #151f32;  
+    --text-primary: #f8fafc;  
+    --text-secondary: #94a3b8;
+    --text-tertiary: #e2e8f0;  
+    --accent: #6366f1;         
     --accent-hover: #818cf8;
     --accent-ring: rgba(99, 102, 241, 0.3);
     --accent-subtle: rgba(99, 102, 241, 0.12);
@@ -177,6 +177,9 @@ main { max-width: 1500px; margin: 0 auto; }
 .read-more:hover { gap: 0.5rem; color: var(--accent-hover); }
 .no-posts { grid-column: 1 / -1; width: 100%; align-items: center; text-align: center; padding: 5rem 2rem; color: var(--text-secondary); background-color: var(--bg-primary); border-radius: 16px; border: 2px dashed var(--card-border); }
 .no-posts h3 { color: var(--text-primary); margin-bottom: 1rem; font-size: 1.5rem; }
+.latest-updates { text-align: left; }
+.latest-updates span { color: var(--var-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.875rem; display: block; }
+.latest-updates h2 { color: var(--accent); font-size: 2.25rem; font-weight: 800; margin: 0; line-height: 1.2; }
 
 /* ==========================================================================
    RESPONSIVE BREAKPOINTS (Mobile & Tablet Optimization)
@@ -202,6 +205,7 @@ main { max-width: 1500px; margin: 0 auto; }
     .modal-overlay.active .modal-card { transform: translateY(0); }
     .modal-actions-footer { flex-direction: column-reverse; gap: 0.75rem; }
     .modal-actions-footer .btn { width: 100%; text-align: center; }
+    .latest-updates span h1 { margin-top: 1rem; }
     .flash-alert { top: auto; bottom: 2rem; left: 1rem; right: 1rem; animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 }

@@ -131,7 +131,7 @@
     /* Enhanced Link Styling */
     .nav-item.dropdown ul li a { display: flex; align-items: center; padding: 0.75rem 1rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-radius: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     /* Indent and color swap on hover for sleek effect */
-    .nav-item.dropdown ul li a:hover { background-color: var(--accent); color: #FFB74D; padding-left: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,209,0.15); }
+    .nav-item.dropdown ul li a:hover { background-color: var(--accent); color: #FFB74D; padding-left: 1.5rem; gap: 0.3rem; box-shadow: 0 4px 10px rgba(0,0,209,0.15); }
 
     /* Animation specifically for the "//" prefix */
     .slash { display: inline-block; color: #FFB74D; margin-right: 8px; font-weight: 800; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease; }

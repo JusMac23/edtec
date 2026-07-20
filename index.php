@@ -41,7 +41,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link class="styles" rel="stylesheet" href="./css/index-styles.css">
+    <link class="styles" rel="stylesheet" href="./css/index.css">
     <link class="styles" rel="stylesheet" href="./css/modal-styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -122,6 +122,12 @@ try {
 
     <main>
         <div class="grid">
+            <div class="latest-updates">
+                <span>// OUR LATEST SERVICES</span>
+                <h2>Read Our Latest Services</h2>
+            </div>
+        </div>
+        <div class="grid">
             <?php if (!empty($posts) && is_array($posts)): ?>
                 <?php foreach ($posts as $post): ?>
                     <?php 
@@ -174,13 +180,7 @@ try {
                 </div>
             <?php endif; ?>
         </div>
-    </main>
-
-    <div class="box" style="max-width: 1400px; margin: 2rem auto; padding: 1rem; text-align: center;">
-        <h1 style="color: #333; font-size: 2rem; text-align: center; margin-bottom: 1rem;">What we do</h1>
-        <p style="color: #666; font-size: 1.1rem; line-height: 1.6; text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-        
+    </main> 
 
     <?php include("footer.php"); ?>
 
