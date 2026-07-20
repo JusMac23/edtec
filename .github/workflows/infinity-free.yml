@@ -14,13 +14,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Install Composer dependencies before deploying
+      - name: Setup PHP and Install Dependencies
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-dev --optimize-autoloader
+
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftpupload.net
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Removed the leading slash. Path is now relative to your login directory.
-          server-dir: htdocs/ 
+          protocol: ftp
+          port: 21
+          server-dir: htdocs/
           exclude: |
             .env
+            **/.git*
+            **/.git*/**
+            .github/**
