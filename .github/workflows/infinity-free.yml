@@ -33,7 +33,6 @@ jobs:
           port: 21
           server-dir: htdocs/
           exclude: |
-            .env
             **/.git*
             **/.git*/**
             .github/**

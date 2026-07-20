@@ -1,5 +1,3 @@
-# Environment variables
-.env
-
 # Database configuration
 database/db.php
+database/config.php
