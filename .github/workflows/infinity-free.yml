@@ -14,25 +14,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Install Composer dependencies before deploying
-      - name: Setup PHP and Install Dependencies
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-dev --optimize-autoloader
+      # Inject real credentials safely during the build run
+      - name: Inject Database Secrets
+        run: |
+          sed -i 's/DB_HOST_PLACEHOLDER/${{ secrets.DB_HOST }}/g' database/config.php
+          sed -i 's/DB_NAME_PLACEHOLDER/${{ secrets.DB_NAME }}/g' database/config.php
+          sed -i 's/DB_USER_PLACEHOLDER/${{ secrets.DB_USER }}/g' database/config.php
+          sed -i 's/DB_PASS_PLACEHOLDER/${{ secrets.DB_PASS }}/g' database/config.php
 
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftpupload.net
+          server: ${{ secrets.FTP_HOSTNAME }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
           server-dir: htdocs/
           exclude: |
+            .env
             **/.git*
             **/.git*/**
             .github/**
