@@ -17,15 +17,12 @@ jobs:
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftpupload.net
+          server: ${{ secrets.FTP_HOSTNAME }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           # InfinityFree requires files to be inside the htdocs folder
           server-dir: /edtec.great-site.net/htdocs/ 
           # Files and folders to ignore during upload
           exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
             .env
-            .github/**
+           
