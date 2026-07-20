@@ -21,6 +21,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           # Removed the leading slash. Path is now relative to your login directory.
-          server-dir: edtec.great-site.net/htdocs/ 
+          server-dir: htdocs/ 
           exclude: |
             .env
